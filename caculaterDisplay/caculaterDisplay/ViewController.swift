@@ -18,8 +18,8 @@ extension Double{
 
 class ViewController: UIViewController {
     
-    var temp = 0.0
-    var sum = 0.0
+    var temp:Double = 0.0
+    var sum:Double = 0.0
     var val = ""
     var sum1 = 0
     @IBOutlet weak var caculateDisplay: UILabel!
@@ -138,6 +138,9 @@ class ViewController: UIViewController {
         val = "/"
         caculateDisplay.text = "0"
         num = true
+    }
+    @IBAction func buttonBs(_ sender: Any) {
+        (caculateDisplay.text!).remove(at: (caculateDisplay.text!).index(before:(caculateDisplay.text!).endIndex))
     }
     @IBAction func buttonCaculator(_ sender: Any) {//等于
      //   switch num{
