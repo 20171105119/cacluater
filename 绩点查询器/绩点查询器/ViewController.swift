@@ -14,62 +14,56 @@ class ViewController: UIViewController {
     var a:Double=0.0
     var b:Double=0.0
     var grade:Double=0.0
-    @IBAction func AddButton(_ sender: Any) {
-        grade = Double(Grade.text!)!
-        
+    var point:Double=0.0
+    func calPoint(grade:Double)->Double {
         if(grade<=100&&grade>=90)
         {
-            jd=4.0
+            return 4.0
         }
         if(grade<=89&&grade>=85)
         {
-            jd=3.7
+            return 3.7
         }
         if(grade<=84&&grade>=82)
         {
-            jd=3.3
+            return 3.3
         }
         if(grade<=81&&grade>=78)
         {
-            jd=3.0
+            return 3.0
         }
         if(grade<=77&&grade>=75)
         {
-            jd=2.7
+            return 2.7
         }
         if(grade<=74&&grade>=71)
         {
-            jd=2.3
+            return 2.3
         }
         if(grade<=70&&grade>=66)
         {
-            jd=2.0
+            return 2.0
         }
         if(grade<=65&&grade>=62)
         {
-            jd=1.7
+            return 1.7
         }
         if(grade>60&&grade<=61)
         {
-            jd=1.3
+            return 1.3
         }
         if(grade==60)
         {
-            jd=1.0
+            return 1.0
+        }else {
+            return 0
         }
-        if(grade<60)
-        {
-            jd=0
-        }
-        a+=jd*Double(StudyMark.text!)!
-        Grade.text=""
-        StudyMark.text=""
-        ClassName.text=""
-        n=n+1
+    }
+    @IBOutlet weak var display: UILabel!
+    @IBAction func AddButton(_ sender: Any) {
+        grade = Double(Grade.text!)!
         if(grade>100||grade<0)
         {
-            n=n-1
-            jd=0
             let alertController = UIAlertController(title: "分数输入错误!",
                                                     message: nil, preferredStyle: .alert)
             //显示提示框
@@ -79,6 +73,14 @@ class ViewController: UIViewController {
                 self.presentedViewController?.dismiss(animated: false, completion: nil)
                 
             }
+        } else {
+            jd = calPoint(grade: grade)
+            a+=jd*Double(StudyMark.text!)!
+            Grade.text=""
+            StudyMark.text=""
+            ClassName.text=""
+            n=n+1
+            point+=point
         }
     }
     @IBOutlet weak var ClassName: UITextField!
@@ -92,6 +94,7 @@ class ViewController: UIViewController {
         a=0
     }
     @IBAction func ResultButton(_ sender: Any) {
+        grade = Double(Grade.text!)!
         if(grade>100||grade<0)
         {
             let alertController = UIAlertController(title: "分数输入错误!",
@@ -102,9 +105,27 @@ class ViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                 self.presentedViewController?.dismiss(animated: false, completion: nil)
             }
+        } else {
+            if n==1 {
+                jd = calPoint(grade: grade)
+                b=jd*Double(StudyMark.text!)!
+                Average.text=String(b)
+                if display.text==""{
+                    display.text = ClassName.text!+"   "+StudyMark.text!+"  "+String(b)
+                }else {
+                    display.text = display.text!+ClassName.text!+"   "+StudyMark.text!+"  "+String(b)
+                }
+            } else {
+                n+=1
+                b=a/point
+                Average.text=String(b)
+                if display.text==""{
+                    display.text = ClassName.text!+"   "+StudyMark.text!+"  "+String(b)
+                }else {
+                    display.text = display.text!+"\n"+ClassName.text!+"   "+StudyMark.text!+"  "+String(b)
+                }
+            }
         }
-        b=a/n
-        Average.text=String(b)
     }
     @IBOutlet weak var Average: UILabel!
     @IBOutlet weak var Grade: UITextField!
@@ -112,7 +133,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        display.lineBreakMode = NSLineBreakMode.byWordWrapping
         
+        display.numberOfLines = 0
     }
 
     override func didReceiveMemoryWarning() {
