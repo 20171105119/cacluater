@@ -9,22 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController {
-var n=0
-var jd:Float=0
+    var n=1.0
+    var jd:Double=0
+    var a:Double=0.0
+    var b:Double=0.0
+    var grade:Double=0.0
     @IBAction func AddButton(_ sender: Any) {
-        Grade.text=""
-        StudyMark.text=""
-        ClassName.text=""
-        n=n+1
-    }
-    @IBOutlet weak var ClassName: UITextField!
-    @IBOutlet weak var StudyMark: UITextField!
-    @IBOutlet weak var Grade: UITextField!
-    @IBOutlet weak var Average: UILabel!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        let grade = Int("Grade.text")!
+        grade = Double(Grade.text!)!
         if(grade<=100&&grade>=90)
         {
             jd=4.0
@@ -69,8 +60,25 @@ var jd:Float=0
         {
             jd=0
         }
+        a+=jd*Double(StudyMark.text!)!
+        Grade.text=""
+        StudyMark.text=""
+        ClassName.text=""
+        n=n+1
+    }
+    @IBOutlet weak var ClassName: UITextField!
+    @IBOutlet weak var StudyMark: UITextField!
+    @IBAction func ResultButton(_ sender: Any) {
+        b=a/n
+        Average.text=String(b)
+    }
+    @IBOutlet weak var Average: UILabel!
+    @IBOutlet weak var Grade: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
         
-        Average.text=Int(StudyMark.text!)!
     }
 
     override func didReceiveMemoryWarning() {
