@@ -16,6 +16,17 @@ class ViewController: UIViewController {
     var grade:Double=0.0
     @IBAction func AddButton(_ sender: Any) {
         grade = Double(Grade.text!)!
+        if(grade>100||grade<0)
+        {
+            let alertController = UIAlertController(title: "分数输入错误!",
+                                                    message: nil, preferredStyle: .alert)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
+            //两秒钟后自动消失
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.presentedViewController?.dismiss(animated: false, completion: nil)
+            }
+        }
         if(grade<=100&&grade>=90)
         {
             jd=4.0
@@ -69,6 +80,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var ClassName: UITextField!
     @IBOutlet weak var StudyMark: UITextField!
     @IBAction func ResultButton(_ sender: Any) {
+        if(grade>100||grade<0)
+        {
+            let alertController = UIAlertController(title: "分数输入错误!",
+                                                    message: nil, preferredStyle: .alert)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
+            //两秒钟后自动消失
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.presentedViewController?.dismiss(animated: false, completion: nil)
+            }
+        }
+        if(StudyMark>6||StudyMark<0)
+        {
+            let alertController = UIAlertController(title: "分数输入错误!",
+                                                    message: nil, preferredStyle: .alert)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
+            //两秒钟后自动消失
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.presentedViewController?.dismiss(animated: false, completion: nil)
+            }
+        }
         b=a/n
         Average.text=String(b)
     }
