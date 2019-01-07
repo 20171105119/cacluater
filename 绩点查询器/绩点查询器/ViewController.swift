@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var n=0.0
+    var n=1
     var jd:Double=0
     var a:Double=0.0
     var b:Double=0.0
@@ -75,12 +75,18 @@ class ViewController: UIViewController {
             }
         } else {
             jd = calPoint(grade: grade)
+            if display.text==""{
+                display.text = ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
+            }else {
+                display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
+            }
             a+=jd*Double(StudyMark.text!)!
+            point=point+Double(StudyMark.text!)!
             Grade.text=""
             StudyMark.text=""
             ClassName.text=""
             n=n+1
-            point+=point
+            
         }
     }
     @IBOutlet weak var ClassName: UITextField!
@@ -90,7 +96,8 @@ class ViewController: UIViewController {
         StudyMark.text=""
         ClassName.text=""
         Average.text=""
-        n=0
+        display.text=""
+        point=0
         a=0
     }
     @IBAction func ResultButton(_ sender: Any) {
@@ -108,21 +115,22 @@ class ViewController: UIViewController {
         } else {
             if n==1 {
                 jd = calPoint(grade: grade)
-                b=jd*Double(StudyMark.text!)!
+                b=jd
                 Average.text=String(b)
                 if display.text==""{
-                    display.text = ClassName.text!+"   "+StudyMark.text!+"  "+String(b)
+                    display.text=ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
                 }else {
-                    display.text = display.text!+ClassName.text!+"   "+StudyMark.text!+"  "+String(b)
+                    display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
                 }
             } else {
-                n+=1
+                point+=Double(StudyMark.text!)!
+                a+=jd*Double(StudyMark.text!)!
                 b=a/point
-                Average.text=String(b)
+                Average.text=String(format: "%.2f",b)
                 if display.text==""{
-                    display.text = ClassName.text!+"   "+StudyMark.text!+"  "+String(b)
+                    display.text = ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
                 }else {
-                    display.text = display.text!+"\n"+ClassName.text!+"   "+StudyMark.text!+"  "+String(b)
+                    display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
                 }
             }
         }
