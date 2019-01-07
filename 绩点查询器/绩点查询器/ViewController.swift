@@ -9,24 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var n=1.0
+    var n=0.0
     var jd:Double=0
     var a:Double=0.0
     var b:Double=0.0
     var grade:Double=0.0
     @IBAction func AddButton(_ sender: Any) {
         grade = Double(Grade.text!)!
-        if(grade>100||grade<0)
-        {
-            let alertController = UIAlertController(title: "分数输入错误!",
-                                                    message: nil, preferredStyle: .alert)
-            //显示提示框
-            self.present(alertController, animated: true, completion: nil)
-            //两秒钟后自动消失
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                self.presentedViewController?.dismiss(animated: false, completion: nil)
-            }
-        }
+        
         if(grade<=100&&grade>=90)
         {
             jd=4.0
@@ -76,12 +66,10 @@ class ViewController: UIViewController {
         StudyMark.text=""
         ClassName.text=""
         n=n+1
-    }
-    @IBOutlet weak var ClassName: UITextField!
-    @IBOutlet weak var StudyMark: UITextField!
-    @IBAction func ResultButton(_ sender: Any) {
         if(grade>100||grade<0)
         {
+            n=n-1
+            jd=0
             let alertController = UIAlertController(title: "分数输入错误!",
                                                     message: nil, preferredStyle: .alert)
             //显示提示框
@@ -89,9 +77,22 @@ class ViewController: UIViewController {
             //两秒钟后自动消失
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                 self.presentedViewController?.dismiss(animated: false, completion: nil)
+                
             }
         }
-        if(StudyMark>6||StudyMark<0)
+    }
+    @IBOutlet weak var ClassName: UITextField!
+    @IBOutlet weak var StudyMark: UITextField!
+    @IBAction func cz(_ sender: Any) {
+        Grade.text=""
+        StudyMark.text=""
+        ClassName.text=""
+        Average.text=""
+        n=0
+        a=0
+    }
+    @IBAction func ResultButton(_ sender: Any) {
+        if(grade>100||grade<0)
         {
             let alertController = UIAlertController(title: "分数输入错误!",
                                                     message: nil, preferredStyle: .alert)
