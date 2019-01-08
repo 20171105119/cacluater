@@ -123,8 +123,8 @@ class ViewController: UIViewController {
                     display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
                 }
             } else {
-                point+=Double(StudyMark.text!)!
                 a+=jd*Double(StudyMark.text!)!
+                point+=Double(StudyMark.text!)!
                 b=a/point
                 Average.text=String(format: "%.2f",b)
                 if display.text==""{
@@ -142,7 +142,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         display.lineBreakMode = NSLineBreakMode.byWordWrapping
-        
         display.numberOfLines = 0
     }
 
