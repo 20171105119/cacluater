@@ -9,10 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var n=1
-    var jd:Double=0
-    var a:Double=0.0
-    var b:Double=0.0
+    var count=1//次数
+    var GPA:Double=0
+    var all:Double=0.0
+    var averageGPA:Double=0.0
     var grade:Double=0.0
     var point:Double=0.0
     func calPoint(grade:Double)->Double {
@@ -74,18 +74,18 @@ class ViewController: UIViewController {
                 
             }
         } else {
-            jd = calPoint(grade: grade)
+            GPA = calPoint(grade: grade)
             if display.text==""{
-                display.text = ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
+                display.text = ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(GPA)+"\n"
             }else {
-                display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
+                display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(GPA)+"\n"
             }
-            a+=jd*Double(StudyMark.text!)!
+            all+=GPA*Double(StudyMark.text!)!
             point=point+Double(StudyMark.text!)!
             Grade.text=""
             StudyMark.text=""
             ClassName.text=""
-            n=n+1
+            count=count+1
             
         }
     }
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
         Average.text=""
         display.text=""
         point=0
-        a=0
+        all=0
     }
     @IBAction func ResultButton(_ sender: Any) {
         grade = Double(Grade.text!)!
@@ -113,24 +113,24 @@ class ViewController: UIViewController {
                 self.presentedViewController?.dismiss(animated: false, completion: nil)
             }
         } else {
-            if n==1 {
-                jd = calPoint(grade: grade)
-                b=jd
-                Average.text=String(b)
+            if count==1 {
+                GPA = calPoint(grade: grade)
+                averageGPA=GPA
+                Average.text=String(averageGPA)
                 if display.text==""{
-                    display.text=ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
+                    display.text=ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(GPA)+"\n"
                 }else {
-                    display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
+                    display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(GPA)+"\n"
                 }
             } else {
-                a+=jd*Double(StudyMark.text!)!
+                all+=GPA*Double(StudyMark.text!)!
                 point+=Double(StudyMark.text!)!
-                b=a/point
-                Average.text=String(format: "%.2f",b)
+                averageGPA=all/point
+                Average.text=String(format: "%.2f",averageGPA)
                 if display.text==""{
-                    display.text = ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
+                    display.text = ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(GPA)+"\n"
                 }else {
-                    display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(jd)+"\n"
+                    display.text = display.text!+ClassName.text!+"       "+StudyMark.text!+"       "+Grade.text!+"  "+String(GPA)+"\n"
                 }
             }
         }
